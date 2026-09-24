@@ -112,6 +112,11 @@ function SetupScreen({ onStart }) {
     setNames((prev) => ({ ...prev, [slotId]: value }));
   }
 
+  function handleGameChange(id) {
+    setGameId(id);
+    setTarget(getGame(id).defaultTarget);
+  }
+
   return (
     <div className="screen">
       <header className="screen__header">
@@ -119,7 +124,7 @@ function SetupScreen({ onStart }) {
         <p className="screen__subtitle">Le tue partite a carte</p>
       </header>
 
-      <GamePicker value={gameId} onChange={setGameId} />
+      <GamePicker value={gameId} onChange={handleGameChange} />
 
       <section className="section">
         <h2 className="section-title">Giocatori</h2>
