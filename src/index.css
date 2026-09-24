@@ -492,13 +492,6 @@ body {
   font-size: 0.85rem;
 }
 
-.round-row__dealer {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--primary);
-  white-space: nowrap;
-}
-
 .round-row__scores {
   flex: 1;
   display: flex;

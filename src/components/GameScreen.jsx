@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { getGame } from "../constants/games";
-import { computeTotals, findPlayer, hasReachedTarget, nextDealerId } from "../utils/scoring";
+import {
+  computeTotals,
+  findPlayer,
+  hasReachedTarget,
+  nextDealerId,
+} from "../utils/scoring";
 import AddRoundModal from "./AddRoundModal";
 
 function ProgressBar({ value, max }) {
@@ -20,9 +25,7 @@ function GameScreen({ match, dispatch, onReset }) {
   const totals = computeTotals(match.teams, match.rounds);
   const reached = hasReachedTarget(match.teams, totals, match.target);
   const rankedTeams = [...match.teams].sort((a, b) =>
-    lowerScoreWins
-      ? totals[a.id] - totals[b.id]
-      : totals[b.id] - totals[a.id],
+    lowerScoreWins ? totals[a.id] - totals[b.id] : totals[b.id] - totals[a.id],
   );
 
   function openAddRound() {
@@ -44,9 +47,7 @@ function GameScreen({ match, dispatch, onReset }) {
   }
 
   function handleAbandon() {
-    if (
-      window.confirm("Vuoi davvero chiudere questa partita senza salvarla?")
-    ) {
+    {
       dispatch({ type: "RESET" });
       onReset?.();
     }
@@ -100,37 +101,37 @@ function GameScreen({ match, dispatch, onReset }) {
         <h2 className="section-title">Obiettivo {match.target}</h2>
         <div className="team-list">
           {rankedTeams.map((team, rank) => {
-              const reachedTarget = totals[team.id] >= match.target;
-              return (
-                <div
-                  key={team.id}
-                  className={`team-card${reachedTarget ? (lowerScoreWins ? " team-card--danger" : " team-card--target") : ""}`}
-                >
-                  <div className="team-card__top">
-                    <span className="team-card__rank big-num">{rank + 1}</span>
-                    <div className="team-card__info">
-                      <span className="team-card__name">{team.name}</span>
-                      <span className="team-card__players">
-                        {team.players.join(" · ")}
-                      </span>
-                    </div>
-                    <span className="team-card__total big-num">
-                      {totals[team.id]}
+            const reachedTarget = totals[team.id] >= match.target;
+            return (
+              <div
+                key={team.id}
+                className={`team-card${reachedTarget ? (lowerScoreWins ? " team-card--danger" : " team-card--target") : ""}`}
+              >
+                <div className="team-card__top">
+                  <span className="team-card__rank big-num">{rank + 1}</span>
+                  <div className="team-card__info">
+                    <span className="team-card__name">{team.name}</span>
+                    <span className="team-card__players">
+                      {team.players.join(" · ")}
                     </span>
                   </div>
-                  <ProgressBar value={totals[team.id]} max={match.target} />
-                  <span className="team-card__target">
-                    {lowerScoreWins
-                      ? reachedTarget
-                        ? "oltre il limite — fuori gioco ✗"
-                        : `mancano ${match.target - totals[team.id]} ${match.target - totals[team.id] === 1 ? "punto" : "punti"} al limite`
-                      : reachedTarget
-                        ? "obiettivo raggiunto ✓"
-                        : `mancano ${match.target - totals[team.id]} ${match.target - totals[team.id] === 1 ? "punto" : "punti"}`}
+                  <span className="team-card__total big-num">
+                    {totals[team.id]}
                   </span>
                 </div>
-              );
-            })}
+                <ProgressBar value={totals[team.id]} max={match.target} />
+                <span className="team-card__target">
+                  {lowerScoreWins
+                    ? reachedTarget
+                      ? "oltre il limite — fuori gioco ✗"
+                      : `mancano ${match.target - totals[team.id]} ${match.target - totals[team.id] === 1 ? "punto" : "punti"} al limite`
+                    : reachedTarget
+                      ? "obiettivo raggiunto ✓"
+                      : `mancano ${match.target - totals[team.id]} ${match.target - totals[team.id] === 1 ? "punto" : "punti"}`}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -165,20 +166,19 @@ function GameScreen({ match, dispatch, onReset }) {
           <ul className="round-list">
             {[...match.rounds].reverse().map((round, i) => {
               const n = match.rounds.length - i;
+              const dealer = round.dealerId
+                ? findPlayer(match.players, round.dealerId)
+                : null;
               return (
                 <li key={round.id} className="round-row">
                   <span className="round-row__num">Manche {n}</span>
-                  {round.dealerId && (
-                    <span className="round-row__dealer">
-                      🂡 {findPlayer(match.players, round.dealerId)?.name ?? "?"}
-                    </span>
-                  )}
                   <div className="round-row__scores">
                     {match.teams.map((team) => (
                       <span
                         key={team.id}
                         className={`chip${(round.scores[team.id] ?? 0) < 0 ? " chip--neg" : ""}`}
                       >
+                        {dealer?.teamId === team.id && "🂡 "}
                         {team.name}: {round.scores[team.id] ?? 0}
                       </span>
                     ))}

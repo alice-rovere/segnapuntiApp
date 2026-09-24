@@ -54,8 +54,8 @@ function Stepper({ label, value, min, max, onChange }) {
 
 function SetupScreen({ onStart }) {
   const [gameId, setGameId] = useState("burraco");
-  const [players, setPlayers] = useState(4);
-  const [mode, setMode] = useState("teams");
+  const [players, setPlayers] = useState(2);
+  const [mode, setMode] = useState("singles");
   const [names, setNames] = useState({});
   const game = getGame(gameId);
   const [target, setTarget] = useState(game.defaultTarget);
