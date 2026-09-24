@@ -28,3 +28,15 @@ export function leadingTeam(teams, totals) {
     totals[team.id] > totals[best.id] ? team : best,
   )
 }
+
+export function nextDealerId(players, rounds) {
+  if (players.length === 0) return null
+  const last = rounds[rounds.length - 1]
+  if (!last?.dealerId) return players[0].id
+  const index = players.findIndex((p) => p.id === last.dealerId)
+  return players[(index + 1) % players.length].id
+}
+
+export function findPlayer(players, dealerId) {
+  return players.find((p) => p.id === dealerId)
+}

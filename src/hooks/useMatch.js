@@ -1,12 +1,27 @@
 import { useReducer } from 'react'
 import { computeTotals, findWinner } from '../utils/scoring'
 
+export function buildPlayers(teams) {
+  const players = []
+  teams.forEach((team) => {
+    team.players.forEach((name, pi) => {
+      players.push({
+        id: `${team.id}-p${pi + 1}`,
+        name,
+        teamId: team.id,
+      })
+    })
+  })
+  return players
+}
+
 export function createMatch({ gameId, mode, teams, target }) {
   return {
     gameId,
     mode,
     target,
     teams,
+    players: buildPlayers(teams),
     rounds: [],
     ended: false,
     winnerId: null,
@@ -27,6 +42,7 @@ export function matchReducer(state, action) {
       const round = {
         id: crypto.randomUUID(),
         scores: { ...action.payload.scores },
+        dealerId: action.payload.dealerId,
       }
       return { ...state, rounds: [...state.rounds, round] }
     }

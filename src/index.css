@@ -483,6 +483,13 @@ body {
   font-size: 0.9rem;
 }
 
+.round-row__dealer {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
 .round-row__scores {
   flex: 1;
   display: flex;
@@ -614,6 +621,40 @@ body {
 
 .round-field__input:focus {
   outline: 2px solid var(--primary);
+}
+
+/* Dealer picker */
+.dealer-picker {
+  margin-top: 16px;
+}
+
+.dealer-picker__label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.dealer-picker__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dealer-chip {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dealer-chip--active {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border-color: var(--primary);
 }
 
 .modal__actions {

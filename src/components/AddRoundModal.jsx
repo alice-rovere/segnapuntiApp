@@ -3,8 +3,19 @@ import { useState } from 'react'
 const emptyValues = (teams) =>
   Object.fromEntries(teams.map((team) => [team.id, { base: '', points: '' }]))
 
-function AddRoundModal({ teams, roundNumber, onCancel, onSubmit, useBasePoints = false }) {
+function AddRoundModal({
+  teams,
+  roundNumber,
+  onCancel,
+  onSubmit,
+  useBasePoints = false,
+  players = [],
+  suggestedDealerId = null,
+}) {
   const [values, setValues] = useState(() => emptyValues(teams))
+  const [dealerId, setDealerId] = useState(
+    () => suggestedDealerId ?? players[0]?.id ?? null,
+  )
 
   const num = (value) => (value === '' ? NaN : Number(value))
 
@@ -33,7 +44,7 @@ function AddRoundModal({ teams, roundNumber, onCancel, onSubmit, useBasePoints =
     const scores = Object.fromEntries(
       teams.map((team) => [team.id, teamTotal(team)]),
     )
-    onSubmit(scores)
+    onSubmit(scores, dealerId)
   }
 
   return (
@@ -85,6 +96,25 @@ function AddRoundModal({ teams, roundNumber, onCancel, onSubmit, useBasePoints =
           })}
         </div>
         <p className="form-hint">Usa il segno − per le multe (es. −20)</p>
+        {players.length > 0 && (
+          <div className="dealer-picker">
+            <span className="dealer-picker__label">
+              🂡 Chi fa carte?
+            </span>
+            <div className="dealer-picker__options">
+              {players.map((player) => (
+                <button
+                  key={player.id}
+                  type="button"
+                  className={`dealer-chip${dealerId === player.id ? " dealer-chip--active" : ""}`}
+                  onClick={() => setDealerId(player.id)}
+                >
+                  {player.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="modal__actions">
           <button type="button" className="btn btn--ghost" onClick={onCancel}>
             Annulla

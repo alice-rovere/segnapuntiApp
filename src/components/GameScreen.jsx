@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getGame } from "../constants/games";
-import { computeTotals, hasReachedTarget } from "../utils/scoring";
+import { computeTotals, findPlayer, hasReachedTarget, nextDealerId } from "../utils/scoring";
 import AddRoundModal from "./AddRoundModal";
 
 function ProgressBar({ value, max }) {
@@ -15,11 +15,17 @@ function ProgressBar({ value, max }) {
 function GameScreen({ match, dispatch, onReset }) {
   const game = getGame(match.gameId);
   const [adding, setAdding] = useState(false);
+  const [suggestedDealerId, setSuggestedDealerId] = useState(null);
   const totals = computeTotals(match.teams, match.rounds);
   const reached = hasReachedTarget(match.teams, totals, match.target);
 
-  function handleAddRound(scores) {
-    dispatch({ type: "ADD_ROUND", payload: { scores } });
+  function openAddRound() {
+    setSuggestedDealerId(nextDealerId(match.players, match.rounds));
+    setAdding(true);
+  }
+
+  function handleAddRound(scores, dealerId) {
+    dispatch({ type: "ADD_ROUND", payload: { scores, dealerId } });
     setAdding(false);
   }
 
@@ -74,7 +80,7 @@ function GameScreen({ match, dispatch, onReset }) {
             <button
               type="button"
               className="btn btn--ghost"
-              onClick={() => setAdding(true)}
+              onClick={openAddRound}
             >
               Continua
             </button>
@@ -121,7 +127,7 @@ function GameScreen({ match, dispatch, onReset }) {
         <button
           type="button"
           className="btn btn--primary btn--big"
-          onClick={() => setAdding(true)}
+          onClick={openAddRound}
         >
           ＋ Aggiungi manche
         </button>
@@ -151,6 +157,11 @@ function GameScreen({ match, dispatch, onReset }) {
               return (
                 <li key={round.id} className="round-row">
                   <span className="round-row__num">Manche {n}</span>
+                  {round.dealerId && (
+                    <span className="round-row__dealer">
+                      🂡 {findPlayer(match.players, round.dealerId)?.name ?? "?"}
+                    </span>
+                  )}
                   <div className="round-row__scores">
                     {match.teams.map((team) => (
                       <span
@@ -173,6 +184,8 @@ function GameScreen({ match, dispatch, onReset }) {
           teams={match.teams}
           roundNumber={match.rounds.length + 1}
           useBasePoints={game.id === "burraco"}
+          players={match.players}
+          suggestedDealerId={suggestedDealerId}
           onCancel={() => setAdding(false)}
           onSubmit={handleAddRound}
         />
