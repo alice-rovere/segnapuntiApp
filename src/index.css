@@ -360,6 +360,10 @@ body {
   border-color: var(--green);
 }
 
+.team-card--danger {
+  border-color: var(--danger);
+}
+
 .team-card__top {
   display: flex;
   align-items: center;

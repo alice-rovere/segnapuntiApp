@@ -14,10 +14,16 @@ function ProgressBar({ value, max }) {
 
 function GameScreen({ match, dispatch, onReset }) {
   const game = getGame(match.gameId);
+  const lowerScoreWins = Boolean(game.lowerScoreWins);
   const [adding, setAdding] = useState(false);
   const [suggestedDealerId, setSuggestedDealerId] = useState(null);
   const totals = computeTotals(match.teams, match.rounds);
   const reached = hasReachedTarget(match.teams, totals, match.target);
+  const rankedTeams = [...match.teams].sort((a, b) =>
+    lowerScoreWins
+      ? totals[a.id] - totals[b.id]
+      : totals[b.id] - totals[a.id],
+  );
 
   function openAddRound() {
     setSuggestedDealerId(nextDealerId(match.players, match.rounds));
@@ -67,7 +73,9 @@ function GameScreen({ match, dispatch, onReset }) {
       {reached && !match.ended && (
         <div className="target-banner">
           <p className="target-banner__title">
-            🎯 Obiettivo {match.target} raggiunto!
+            {lowerScoreWins
+              ? `🚨 Qualcuno ha superato il limite di ${match.target}!`
+              : `🎯 Obiettivo ${match.target} raggiunto!`}
           </p>
           <div className="target-banner__actions">
             <button
@@ -91,14 +99,12 @@ function GameScreen({ match, dispatch, onReset }) {
       <section className="section">
         <h2 className="section-title">Obiettivo {match.target}</h2>
         <div className="team-list">
-          {[...match.teams]
-            .sort((a, b) => totals[b.id] - totals[a.id])
-            .map((team, rank) => {
+          {rankedTeams.map((team, rank) => {
               const reachedTarget = totals[team.id] >= match.target;
               return (
                 <div
                   key={team.id}
-                  className={`team-card${reachedTarget ? " team-card--target" : ""}`}
+                  className={`team-card${reachedTarget ? (lowerScoreWins ? " team-card--danger" : " team-card--target") : ""}`}
                 >
                   <div className="team-card__top">
                     <span className="team-card__rank big-num">{rank + 1}</span>
@@ -114,9 +120,13 @@ function GameScreen({ match, dispatch, onReset }) {
                   </div>
                   <ProgressBar value={totals[team.id]} max={match.target} />
                   <span className="team-card__target">
-                    {reachedTarget
-                      ? "obiettivo raggiunto ✓"
-                      : `mancano ${match.target - totals[team.id]} ${match.target - totals[team.id] === 1 ? "punto" : "punti"}`}
+                    {lowerScoreWins
+                      ? reachedTarget
+                        ? "oltre il limite — fuori gioco ✗"
+                        : `mancano ${match.target - totals[team.id]} ${match.target - totals[team.id] === 1 ? "punto" : "punti"} al limite`
+                      : reachedTarget
+                        ? "obiettivo raggiunto ✓"
+                        : `mancano ${match.target - totals[team.id]} ${match.target - totals[team.id] === 1 ? "punto" : "punti"}`}
                   </span>
                 </div>
               );

@@ -3,8 +3,13 @@ import { getGame } from '../constants/games'
 
 function ResultScreen({ match, onRematch, onNewSetup }) {
   const game = getGame(match.gameId)
+  const lowerScoreWins = Boolean(game.lowerScoreWins)
   const totals = computeTotals(match.teams, match.rounds)
-  const sorted = [...match.teams].sort((a, b) => totals[b.id] - totals[a.id])
+  const sorted = [...match.teams].sort((a, b) =>
+    lowerScoreWins
+      ? totals[a.id] - totals[b.id]
+      : totals[b.id] - totals[a.id],
+  )
   const winner = match.teams.find((t) => t.id === match.winnerId)
 
   return (
@@ -22,7 +27,9 @@ function ResultScreen({ match, onRematch, onNewSetup }) {
           <p className="winner-card__label">Vince</p>
           <p className="winner-card__name">{winner.name}</p>
           <p className="winner-card__points">
-            {totals[winner.id]} / {match.target} punti
+            {lowerScoreWins
+              ? `${totals[winner.id]} punti`
+              : `${totals[winner.id]} / ${match.target} punti`}
           </p>
         </section>
       )}

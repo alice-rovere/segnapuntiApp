@@ -1,5 +1,6 @@
 import { useReducer } from 'react'
 import { computeTotals, findWinner } from '../utils/scoring'
+import { getGame } from '../constants/games'
 
 export function buildPlayers(teams) {
   const players = []
@@ -55,7 +56,9 @@ export function matchReducer(state, action) {
       const totals = computeTotals(state.teams, state.rounds)
       const winnerId =
         action.payload?.winnerId ??
-        findWinner(state.teams, totals, state.target)?.id ??
+        findWinner(state.teams, totals, state.target, {
+          lowerScoreWins: getGame(state.gameId).lowerScoreWins,
+        })?.id ??
         null
       return { ...state, ended: true, winnerId }
     }

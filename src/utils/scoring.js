@@ -11,7 +11,15 @@ export function computeTotals(teams, rounds) {
   return totals
 }
 
-export function findWinner(teams, totals, target) {
+export function findWinner(teams, totals, target, { lowerScoreWins = false } = {}) {
+  if (lowerScoreWins) {
+    const overTarget = teams.filter((team) => totals[team.id] >= target)
+    if (overTarget.length === 0) return null
+    const pool = teams.filter((team) => totals[team.id] < target)
+    return (pool.length > 0 ? pool : overTarget).reduce((best, team) =>
+      totals[team.id] < totals[best.id] ? team : best,
+    )
+  }
   const qualified = teams.filter((team) => totals[team.id] >= target)
   if (qualified.length === 0) return null
   return qualified.reduce((best, team) =>

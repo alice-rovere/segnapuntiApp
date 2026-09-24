@@ -5,7 +5,8 @@ export const GAMES = [
     emoji: '🃏',
     defaultTarget: 1500,
     defaultPlayers: 4,
-    description: 'A coppie, 1500 punti',
+    description: 'A coppie, 1500 punti — vince chi ha più punti',
+    lowerScoreWins: false,
   },
   {
     id: 'scala40',
@@ -13,7 +14,8 @@ export const GAMES = [
     emoji: '🂡',
     defaultTarget: 151,
     defaultPlayers: 4,
-    description: 'Singoli o a squadre, 151 punti',
+    description: 'Singoli o a squadre, 151 punti — vince chi ha meno punti',
+    lowerScoreWins: true,
   },
   {
     id: 'macchiavelli',
@@ -21,7 +23,8 @@ export const GAMES = [
     emoji: '🂭',
     defaultTarget: 500,
     defaultPlayers: 4,
-    description: 'Singoli o a squadre, 500 punti',
+    description: 'Singoli o a squadre, 500 punti — vince chi ha meno punti',
+    lowerScoreWins: true,
   },
 ]
 
