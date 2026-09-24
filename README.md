@@ -1,16 +1,41 @@
-# React + Vite
+# Segnapunti
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Segnapunti per giochi di carte italiani, pensato per l'uso su telefono. SPA statica senza backend: lo stato della partita vive solo nella memoria del browser.
 
-Currently, two official plugins are available:
+## Giochi supportati
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Burraco** — target di default 1500 punti
+- **Scala 40** — target 151 punti, vince chi ha meno punti
+- **Macchiavelli** — target 500 punti, vince chi ha meno punti
 
-## React Compiler
+Per ogni partita si possono scegliere modalità a squadre o singoli, il target e i nomi di giocatori e squadre. Si registrano i punteggi di ogni round, con il dealer, fino a raggiungere il target.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Sviluppo locale
 
-## Expanding the ESLint configuration
+Il package manager è **pnpm** (non npm).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+pnpm install
+pnpm dev
+```
+
+Build di produzione:
+
+```bash
+pnpm build
+pnpm preview
+```
+
+Lint:
+
+```bash
+pnpm lint
+```
+
+## Deploy
+
+A ogni push su `main` un workflow GitHub Actions (`.github/workflows/deploy.yml`) compila e pubblica l'app su GitHub Pages:
+
+**https://alice-rovere.github.io/segnapuntiApp/**
+
+Nota: `vite.config.js` imposta `base: '/segnapuntiApp/'` per il subpath del repo. Se il repo viene rinominato, aggiornare anche il `base`.
