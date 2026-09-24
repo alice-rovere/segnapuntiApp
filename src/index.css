@@ -11,8 +11,8 @@
   --primary-contrast: #1b1f2b;
   --danger: #e56a5c;
   --green: #59c07a;
-  --radius: 14px;
-  --radius-sm: 10px;
+  --radius: 12px;
+  --radius-sm: 8px;
   --shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
   --maxw: 560px;
   font-family:
@@ -33,7 +33,7 @@ body {
   padding: 0;
   background: var(--bg);
   color: var(--text);
-  font-size: 16px;
+  font-size: 14px;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -46,10 +46,10 @@ body {
 .screen {
   width: 100%;
   max-width: var(--maxw);
-  padding: 20px 16px calc(96px + env(safe-area-inset-bottom));
+  padding: 12px 12px calc(72px + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
 }
 
 .screen__header {
@@ -67,20 +67,21 @@ body {
 
 .screen__kicker {
   margin: 0 0 2px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--primary);
   font-weight: 600;
 }
 
 .screen__title {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   line-height: 1.2;
 }
 
 .screen__subtitle {
-  margin: 4px 0 0;
+  margin: 2px 0 0;
   color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 /* Sections */
@@ -88,12 +89,12 @@ body {
   background: var(--bg-soft);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 10px;
 }
 
 .section-title {
-  margin: 0 0 14px;
-  font-size: 0.9rem;
+  margin: 0 0 8px;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--text-muted);
@@ -104,7 +105,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .section-head .section-title {
@@ -120,34 +121,29 @@ body {
   margin: 0;
   color: var(--text-muted);
   text-align: center;
+  font-size: 0.9rem;
 }
 
 /* Game picker */
 .game-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-
-@media (min-width: 480px) {
-  .game-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
 }
 
 .game-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 16px 12px;
+  gap: 3px;
+  padding: 10px 8px;
   border-radius: var(--radius);
   border: 2px solid var(--border);
   background: var(--card);
   color: var(--text);
   cursor: pointer;
   font: inherit;
-  min-height: 110px;
+  min-height: 84px;
   transition:
     border-color 0.15s,
     transform 0.05s;
@@ -163,17 +159,17 @@ body {
 }
 
 .game-card__emoji {
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 1;
 }
 
 .game-card__name {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
 }
 
 .game-card__desc {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
   text-align: center;
 }
@@ -194,17 +190,17 @@ body {
 .stepper__controls {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .stepper__btn {
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-sm);
   border: 2px solid var(--border);
   background: var(--card);
   color: var(--text);
-  font-size: 1.4rem;
+  font-size: 1.15rem;
   cursor: pointer;
 }
 
@@ -214,7 +210,7 @@ body {
 }
 
 .stepper__value {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 700;
   min-width: 2ch;
   text-align: center;
@@ -225,16 +221,16 @@ body {
 .segmented {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 6px;
   background: var(--card);
-  padding: 5px;
+  padding: 4px;
   border-radius: var(--radius-sm);
 }
 
 .segmented__btn {
-  padding: 12px;
+  padding: 8px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   background: transparent;
   color: var(--text-muted);
   font: inherit;
@@ -250,8 +246,8 @@ body {
 /* Inputs */
 .text-input {
   width: 100%;
-  padding: 14px;
-  margin-bottom: 10px;
+  padding: 9px;
+  margin-bottom: 6px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: var(--card);
@@ -259,8 +255,12 @@ body {
   font: inherit;
 }
 
+.text-input:last-child {
+  margin-bottom: 0;
+}
+
 .text-input--number {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: center;
 }
 
@@ -274,8 +274,8 @@ body {
 }
 
 .form-hint {
-  margin: 6px 0 0;
-  font-size: 0.78rem;
+  margin: 4px 0 0;
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
@@ -289,7 +289,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 20px;
+  padding: 10px 14px;
   border-radius: var(--radius-sm);
   border: none;
   font: inherit;
@@ -317,13 +317,13 @@ body {
 .btn--big {
   width: 100%;
   max-width: 360px;
-  padding: 18px;
-  font-size: 1.1rem;
+  padding: 12px;
+  font-size: 0.95rem;
 }
 
 .btn--sm {
-  padding: 8px 12px;
-  font-size: 0.85rem;
+  padding: 6px 10px;
+  font-size: 0.8rem;
 }
 
 /* Fixed actions */
@@ -332,7 +332,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
   display: flex;
   justify-content: center;
 }
@@ -346,14 +346,14 @@ body {
 .team-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .team-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 14px;
+  padding: 8px;
 }
 
 .team-card--target {
@@ -367,8 +367,8 @@ body {
 .team-card__top {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
+  gap: 10px;
+  margin-bottom: 6px;
 }
 
 .team-card__info {
@@ -379,7 +379,7 @@ body {
 .team-card__name {
   display: block;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 0.92rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -387,7 +387,7 @@ body {
 
 .team-card__players {
   display: block;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;
@@ -401,7 +401,7 @@ body {
 }
 
 .big-num {
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 800;
 }
 
@@ -411,14 +411,14 @@ body {
 
 .team-card__target {
   display: block;
-  margin-top: 6px;
-  font-size: 0.74rem;
+  margin-top: 4px;
+  font-size: 0.7rem;
   color: var(--text-muted);
 }
 
 /* Progress */
 .progress {
-  height: 6px;
+  height: 4px;
   background: var(--bg);
   border-radius: 999px;
   overflow: hidden;
@@ -436,18 +436,23 @@ body {
   background: linear-gradient(135deg, var(--green), #3f9a63);
   color: #fff;
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 10px;
   box-shadow: var(--shadow);
 }
 
 .target-banner__title {
-  margin: 0 0 10px;
+  margin: 0 0 6px;
   font-weight: 700;
+  font-size: 0.95rem;
 }
 
 .target-banner__actions {
   display: flex;
-  gap: 10px;
+  gap: 8px;
+}
+
+.target-banner__actions .btn {
+  padding: 8px 12px;
 }
 
 .target-banner__actions .btn--primary {
@@ -467,28 +472,28 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 .round-row {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 8px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 12px;
+  padding: 7px;
 }
 
 .round-row__num {
   font-weight: 600;
   color: var(--text-muted);
-  min-width: 86px;
-  font-size: 0.9rem;
+  min-width: 72px;
+  font-size: 0.85rem;
 }
 
 .round-row__dealer {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: var(--primary);
   white-space: nowrap;
@@ -498,14 +503,14 @@ body {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 4px;
 }
 
 .chip {
   background: var(--card-soft);
   border-radius: 999px;
-  padding: 5px 10px;
-  font-size: 0.8rem;
+  padding: 3px 8px;
+  font-size: 0.75rem;
 }
 
 .chip--neg {
@@ -515,7 +520,8 @@ body {
 .empty-state {
   color: var(--text-muted);
   text-align: center;
-  padding: 12px 0;
+  padding: 6px 0;
+  font-size: 0.9rem;
 }
 
 /* Modal */
@@ -539,44 +545,46 @@ body {
   width: 100%;
   max-width: var(--maxw);
   background: var(--bg-soft);
-  border-radius: 20px 20px 0 0;
-  padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+  border-radius: 16px 16px 0 0;
+  padding: 14px 12px calc(14px + env(safe-area-inset-bottom));
   max-height: 85dvh;
   overflow-y: auto;
 }
 
 @media (min-width: 480px) {
   .modal {
-    border-radius: 20px;
+    border-radius: 16px;
   }
 }
 
 .modal__title {
-  margin: 0 0 4px;
+  margin: 0 0 2px;
 }
 
 .modal__subtitle {
-  margin: 0 0 16px;
+  margin: 0 0 10px;
   color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 .modal__teams {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .round-field-group {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 12px;
+  padding: 8px;
 }
 
 .round-field-group__label {
   display: block;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
 }
 
 .round-field-group__inputs {
@@ -590,13 +598,13 @@ body {
 
 .round-field-group__inputs .round-field__input {
   width: 100%;
-  max-width: 120px;
+  max-width: 110px;
 }
 
 .round-field-group__total {
   display: inline-block;
-  margin-top: 8px;
-  font-size: 0.85rem;
+  margin-top: 6px;
+  font-size: 0.8rem;
   color: var(--text-muted);
 }
 
@@ -604,17 +612,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
 }
 
 .round-field__label {
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .round-field__input {
-  width: 120px;
-  padding: 14px;
-  font-size: 1.3rem;
+  width: 100px;
+  padding: 9px;
+  font-size: 1.1rem;
   font-weight: 700;
   text-align: right;
   border-radius: var(--radius-sm);
@@ -629,23 +638,24 @@ body {
 
 /* Dealer picker */
 .dealer-picker {
-  margin-top: 16px;
+  margin-top: 10px;
 }
 
 .dealer-picker__label {
   display: block;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
 }
 
 .dealer-picker__options {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .dealer-chip {
-  padding: 8px 14px;
+  padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--card);
@@ -653,6 +663,7 @@ body {
   font: inherit;
   font-weight: 600;
   cursor: pointer;
+  font-size: 0.85rem;
 }
 
 .dealer-chip--active {
@@ -663,8 +674,8 @@ body {
 
 .modal__actions {
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 8px;
+  margin-top: 12px;
 }
 
 .modal__actions .btn {
@@ -677,32 +688,33 @@ body {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: var(--primary-contrast);
   border-radius: var(--radius);
-  padding: 22px 16px;
+  padding: 14px 12px;
   box-shadow: var(--shadow);
 }
 
 .winner-card__trophy {
-  font-size: 2.6rem;
+  font-size: 2rem;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .winner-card__label {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .winner-card__name {
   margin: 2px 0;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 800;
 }
 
 .winner-card__points {
   margin: 0;
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .final-list {
@@ -711,17 +723,17 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 .final-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 14px;
+  padding: 9px;
 }
 
 .final-row--winner {
@@ -729,7 +741,7 @@ body {
 }
 
 .final-row__rank {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   width: 1.6em;
   text-align: center;
 }
@@ -737,17 +749,18 @@ body {
 .final-row__name {
   flex: 1;
   font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .final-row__points {
   font-weight: 800;
-  font-size: 1.15rem;
+  font-size: 1rem;
 }
 
 /* Fixed actions in result needs extra room for two buttons */
 .fixed-actions {
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .fixed-actions .btn {

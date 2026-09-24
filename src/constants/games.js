@@ -4,8 +4,7 @@ export const GAMES = [
     name: 'Burraco',
     emoji: '🃏',
     defaultTarget: 1500,
-    defaultPlayers: 4,
-    description: 'A coppie, 1500 punti — vince chi ha più punti',
+    defaultPlayers: 2,
     lowerScoreWins: false,
   },
   {
@@ -13,8 +12,7 @@ export const GAMES = [
     name: 'Scala 40',
     emoji: '🂡',
     defaultTarget: 151,
-    defaultPlayers: 4,
-    description: 'Singoli o a squadre, 151 punti — vince chi ha meno punti',
+    defaultPlayers: 2,
     lowerScoreWins: true,
   },
   {
@@ -23,7 +21,6 @@ export const GAMES = [
     emoji: '🂭',
     defaultTarget: 500,
     defaultPlayers: 4,
-    description: 'Singoli o a squadre, 500 punti — vince chi ha meno punti',
     lowerScoreWins: true,
   },
 ]

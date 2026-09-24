@@ -17,7 +17,6 @@ function GamePicker({ value, onChange }) {
             >
               <span className="game-card__emoji">{game.emoji}</span>
               <span className="game-card__name">{game.name}</span>
-              <span className="game-card__desc">{game.description}</span>
             </button>
           );
         })}
