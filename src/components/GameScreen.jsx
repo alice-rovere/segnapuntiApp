@@ -89,7 +89,7 @@ function GameScreen({ match, dispatch, onReset }) {
       )}
 
       <section className="section">
-        <h2 className="section-title">Classifica</h2>
+        <h2 className="section-title">Obiettivo {match.target}</h2>
         <div className="team-list">
           {[...match.teams]
             .sort((a, b) => totals[b.id] - totals[a.id])
@@ -114,8 +114,9 @@ function GameScreen({ match, dispatch, onReset }) {
                   </div>
                   <ProgressBar value={totals[team.id]} max={match.target} />
                   <span className="team-card__target">
-                    obiettivo {match.target}
-                    {reachedTarget ? " ✓" : ""}
+                    {reachedTarget
+                      ? "obiettivo raggiunto ✓"
+                      : `mancano ${match.target - totals[team.id]} ${match.target - totals[team.id] === 1 ? "punto" : "punti"}`}
                   </span>
                 </div>
               );
